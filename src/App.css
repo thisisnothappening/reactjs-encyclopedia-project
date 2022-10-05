@@ -1,38 +1,120 @@
-.App {
-  text-align: center;
+body {
+	margin: 0;
+	padding: 0;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+	text-align: center;
+	border-bottom: thick solid black;
+	padding: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header h1 {
+	font-size: 2em;
+	margin: 0;
+	margin-bottom: .3em;
+	display: inline-flex
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header .title-w,
+.header .title-p {
+	font-size: 3em;
+	margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.AddArticle {
+	border-bottom: thin solid black;
+	text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.EditArticle {
+	border-bottom: thin solid black;
+	text-align: center;
+}
+
+.AddArticle button:hover {
+	cursor: pointer;
+}
+
+.article-list {
+	text-align: center;
+}
+
+.article-list ul {
+	margin: 0;
+	margin-top: 2em;
+	padding: 0;
+	text-align: center;
+	display: inline-flex;
+	flex-wrap: wrap;
+	max-width: 100%;
+}
+
+.article-list button {
+	text-align: initial;
+	display: flex;
+	margin: 1em;
+	margin-bottom: 0;
+	width: 18em;
+	height: 5.5em;
+	text-decoration: none;
+	color: black;
+	border: thin solid black;
+	background-color: rgb(218, 222, 248);
+}
+
+.article-list button:hover {
+	background-color: rgb(202, 208, 248);
+	cursor: pointer;
+}
+
+.article-list button li {
+	width: inherit;
+	height: inherit;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+.info h2, p {
+	margin: .5em;
+}
+
+.article-list img {
+	width: 7em;
+	height: 5.5em;
+}
+
+.box {
+	margin: 1em;
+	margin-top: 0;
+	border: thin solid black;
+}
+
+.box .buttons {
+	display: flex;
+}
+
+.box .buttons .edit {
+	width: 5em;
+	height: 2em;
+	text-align: center;
+	display: block;
+	background-color: rgb(245, 227, 68);
+	border-radius: 10%;
+}
+
+.box .buttons .delete {
+	width: 5em;
+	height: 2em;
+	text-align: center;
+	display: block;
+	background-color: rgb(245, 89, 68);
+	border-radius: 10%;
+}
+
+.box p {
+	text-align: left;
 }
