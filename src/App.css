@@ -9,6 +9,13 @@ body {
 	text-align: center;
 	border-bottom: thick solid black;
 	padding: 1em;
+	width: 100%;
+	position: fixed;
+	background-color: white;
+}
+
+.header-hitbox {
+	height: 16em;
 }
 
 .header h1 {

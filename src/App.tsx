@@ -7,7 +7,6 @@ import axios from 'axios';
 import EditArticle from './components/EditArticle';
 
 const App: FC = () => {
-	const [article, setArticle] = useState<Article>();
 	const [articles, setArticles] = useState<Article[]>();
 	const [selectedArticle, setSelectedArticle] = useState<Article>();
 	const [showText, setShowText] = useState(false);
@@ -48,10 +47,6 @@ const App: FC = () => {
 		reloadArticles()
 	}, [searchName])
 
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-	}
-
 	return (
 		<div className="App">
 			<div className="header">
@@ -73,6 +68,7 @@ const App: FC = () => {
 				<br />
 				<Button variant='contained' color='success' onClick={() => setShowAddBox(!showAddBox)}>ADD ARTICLE</Button>
 			</div>
+			<div className="header-hitbox"></div>
 
 			{showAddBox && <AddArticle></AddArticle>}
 
