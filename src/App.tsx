@@ -6,7 +6,7 @@ import AddArticle from './components/AddArticle';
 import axios from 'axios';
 import EditArticle from './components/EditArticle';
 
-const App: FC = () => {
+const App = () => {
 	const [articles, setArticles] = useState<Article[]>();
 	const [selectedArticle, setSelectedArticle] = useState<Article>();
 	const [showText, setShowText] = useState(false);
@@ -46,6 +46,14 @@ const App: FC = () => {
 	useEffect(() => {
 		reloadArticles()
 	}, [searchName])
+
+	useEffect(() => {
+		setShowAddBox(false)
+	}, [showEditBox])
+
+	useEffect(() => {
+		setShowEditBox(false)
+	}, [showAddBox])
 
 	return (
 		<div className="App">
@@ -87,6 +95,7 @@ const App: FC = () => {
 									<img src={article.picture} />
 								</li>
 							</button>
+							
 							{showText && <div className='box'>
 								<div className="buttons">
 									<button className='edit' onClick={() => onClick(article)}>EDIT</button>
