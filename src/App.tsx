@@ -58,7 +58,7 @@ const App = () => {
 	return (
 		<div className="App">
 			<div className="header">
-				<h1 className='title-w'>W</h1><h1>ELCOME</h1><h1 className='title-p'>P</h1><h1>EDIA</h1>
+				<h1><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
 				<br />
 				{/*{selectedArticle && categories && <CategoryFilter selectedArticle={selectedArticle} categories={categories}></CategoryFilter>}*/}
 				<FormControl>

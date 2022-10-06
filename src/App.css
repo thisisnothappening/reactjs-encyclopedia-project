@@ -21,14 +21,11 @@ body {
 .header h1 {
 	font-size: 2em;
 	margin: 0;
-	margin-bottom: .3em;
-	display: inline-flex
 }
 
 .header .title-w,
 .header .title-p {
-	font-size: 3em;
-	margin: 0;
+	font-size: 2em;
 }
 
 .AddArticle {
