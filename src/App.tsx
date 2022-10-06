@@ -24,9 +24,15 @@ const App = () => {
 		getArticles()
 	}, []);
 
-	const onClick = (article: Article) => {
+	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);
 		setShowEditBox(!showEditBox);
+		setShowAddBox(false)
+	}
+
+	const onClickAdd = () => {
+		setShowAddBox(!showAddBox)
+		setShowEditBox(false)
 	}
 
 	const deleteArticle = (article: Article) => {
@@ -47,14 +53,6 @@ const App = () => {
 		reloadArticles()
 	}, [searchName])
 
-	useEffect(() => {
-		setShowAddBox(false)
-	}, [showEditBox])
-
-	useEffect(() => {
-		setShowEditBox(false)
-	}, [showAddBox])
-
 	return (
 		<div className="App">
 			<div className="header">
@@ -74,7 +72,7 @@ const App = () => {
 				<br />
 				<TextField sx={{ margin: 1 }} size="small" value={searchName} onChange={(e) => setSearchName(e.target.value)}></TextField>
 				<br />
-				<Button variant='contained' color='success' onClick={() => setShowAddBox(!showAddBox)}>ADD ARTICLE</Button>
+				<Button variant='contained' color='success' onClick={() => onClickAdd()}>ADD ARTICLE</Button>
 			</div>
 			<div className="header-hitbox"></div>
 
@@ -98,7 +96,7 @@ const App = () => {
 							
 							{showText && <div className='box'>
 								<div className="buttons">
-									<button className='edit' onClick={() => onClick(article)}>EDIT</button>
+									<button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>
 									<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
 								</div>
 								<p>{article.text}</p>
