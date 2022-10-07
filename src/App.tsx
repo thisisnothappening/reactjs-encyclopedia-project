@@ -30,7 +30,7 @@ const App = () => {
 
 	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);
-		setShowEditBox(!showEditBox);
+		setShowEditBox(true);
 		setShowAddBox(false)
 		setShowFilterBox(false)
 		setShowAddButton(false)
@@ -84,10 +84,11 @@ const App = () => {
 	return (
 		<div className="App">
 			<div className="header">
+				<div className="for-flex-purposes">
 				<h1><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
-				{showCloseButton && <Button variant='contained' color='error' onClick={() => onClickClose()}>CLOSE</Button>}
-				{showAddButton && <Button variant='contained' color='success' onClick={() => onClickAdd()}>ADD ARTICLE</Button>}
-				<br />
+				{showCloseButton && <Button size='small' variant='contained' color='error' onClick={() => onClickClose()}>CLOSE</Button>}
+				{showAddButton && <Button size='small' variant='contained' color='success' onClick={() => onClickAdd()}>ADD</Button>}
+				</div>
 				{showFilterBox && <div className="filter-box">
 					{/*{selectedArticle && categories && <CategoryFilter selectedArticle={selectedArticle} categories={categories}></CategoryFilter>}*/}
 					<FormControl>
@@ -100,7 +101,6 @@ const App = () => {
 							{categories?.map(category => <MenuItem>{category}</MenuItem>)}
 						</Select>
 					</FormControl>
-					<br />
 					<TextField sx={{ margin: 1 }} size="small" value={searchName} onChange={(e) => setSearchName(e.target.value)}/>
 				</div>}
 				{showAddBox && <AddArticle></AddArticle>}

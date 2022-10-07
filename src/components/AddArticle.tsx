@@ -37,7 +37,7 @@ const AddArticle = () => {
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<Button variant="contained" color="success" onClick={() => addArticle()}>SAVE</Button>
+			<Button size="small" variant="contained" color="success" onClick={() => addArticle()}>SAVE</Button>
 		</form>
 	);
 }
