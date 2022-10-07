@@ -8,14 +8,14 @@ body {
 .header {
 	text-align: center;
 	border-bottom: thick solid black;
-	padding: 1em;
 	width: 100%;
 	position: fixed;
 	background-color: white;
+	height: 17em;
 }
 
 .header-hitbox {
-	height: 19em;
+	height: 18em;
 }
 
 .header h1 {
@@ -28,14 +28,8 @@ body {
 	font-size: 2em;
 }
 
-.AddArticle {
-	border-bottom: thin solid black;
-	text-align: center;
-}
-
-.EditArticle {
-	border-bottom: thin solid black;
-	text-align: center;
+.header .filter-box {
+	margin: .5em;
 }
 
 .AddArticle button:hover {

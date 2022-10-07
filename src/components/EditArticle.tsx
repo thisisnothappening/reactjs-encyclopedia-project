@@ -37,7 +37,7 @@ const EditArticle = ({ selectedArticle }: { selectedArticle: Article }) => {
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<button onClick={() => editArticle()}>Save</button>
+			<Button variant="contained" color="success" onClick={() => editArticle()}>SAVE</Button>
 		</form>
 	)
 }

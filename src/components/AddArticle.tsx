@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { Article } from "../model/Article";
@@ -13,7 +14,8 @@ const AddArticle = () => {
 			alert('All fields are mandatory!')
 			return
 		}
-		axios.post("http://localhost:8080/articles", { name: name, category: category, picture: picture, text: text });
+		axios.post("http://localhost:8080/articles", 
+		{ name: name, category: category, picture: picture, text: text });
 	}
 
 	return (
@@ -35,7 +37,7 @@ const AddArticle = () => {
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<button onClick={() => addArticle()}>Save</button>
+			<Button variant="contained" color="success" onClick={() => addArticle()}>SAVE</Button>
 		</form>
 	);
 }
