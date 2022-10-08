@@ -16,17 +16,9 @@ const App = () => {
 	const [showCloseButton, setShowCloseButton] = useState(false);
 	const [showAddButton, setShowAddButton] = useState(true);
 	const [showEditButton, setShowEditButton] = useState(true);
-	const [selectedCategory, setSelectedCategory] = useState<string>();
+	const [searchCategory, setSearchCategory] = useState<string>("");
 	const [categories, setCategories] = useState<string[]>();
 	const [searchName, setSearchName] = useState<string>("");
-
-	const getArticles = () => {
-		axios.get("http://localhost:8080/articles").then((response) => setArticles(response.data));
-	}
-
-	useEffect(() => {
-		getArticles()
-	}, []);
 
 	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);
@@ -72,36 +64,37 @@ const App = () => {
 			})
 	}
 
-	const reloadArticles = () => {
-		axios.get(`http://localhost:8080/articles?name=${searchName}`).then((response) => setArticles(response.data))
+	const getArticles = () => {
+		axios.get(`http://localhost:8080/articles?name=${searchName}&category=${searchCategory}`)
+			.then((response) => setArticles(response.data))
 	}
 
 	useEffect(() => {
-		reloadArticles()
-	}, [searchName])
+		getArticles()
+	}, [searchName, searchCategory])
 
 
 	return (
 		<div className="App">
 			<div className="header">
 				<div className="for-flex-purposes">
-				<h1><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
-				{showCloseButton && <Button size='small' variant='contained' color='error' onClick={() => onClickClose()}>CLOSE</Button>}
-				{showAddButton && <Button size='small' variant='contained' color='success' onClick={() => onClickAdd()}>ADD</Button>}
+					<h1><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
+					{showCloseButton && <Button size='small' variant='contained' color='error' onClick={() => onClickClose()}>CLOSE</Button>}
+					{showAddButton && <Button size='small' variant='contained' color='success' onClick={() => onClickAdd()}>ADD</Button>}
 				</div>
 				{showFilterBox && <div className="filter-box">
-					{/*{selectedArticle && categories && <CategoryFilter selectedArticle={selectedArticle} categories={categories}></CategoryFilter>}*/}
-					<FormControl>
+					<FormControl sx={{ minWidth: 100, margin: .5, marginRight: 0 }} size="small">
 						<InputLabel id="demo-simple-select-label">Category</InputLabel>
 						<Select
 							id="demo-simple-select-label"
-							value={selectedCategory}
-							onChange={(e) => setSelectedCategory(e.target.value)}
+							value={searchCategory}
+							onChange={(e) => setSearchCategory(e.target.value)}
 						>
-							{categories?.map(category => <MenuItem>{category}</MenuItem>)}
+							{articles?.map(article => <MenuItem value={article.category}>{article.category}</MenuItem>)}
 						</Select>
 					</FormControl>
-					<TextField sx={{ margin: 1 }} size="small" value={searchName} onChange={(e) => setSearchName(e.target.value)}/>
+					<TextField sx={{ margin: .5 }} autoComplete='off' size="small" value={searchName}
+						onChange={(e) => setSearchName(e.target.value)} />
 				</div>}
 				{showAddBox && <AddArticle></AddArticle>}
 				{showEditBox && selectedArticle && <EditArticle selectedArticle={selectedArticle}></EditArticle>}
