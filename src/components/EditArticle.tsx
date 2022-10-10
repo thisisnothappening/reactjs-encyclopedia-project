@@ -42,7 +42,7 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<button className="save" onClick={() => editArticle()}>SAVE</button>
+			<button className="save" type="button" onClick={() => editArticle()}>SAVE</button>
 		</form>
 	)
 }

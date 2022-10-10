@@ -41,7 +41,7 @@ const AddArticle: FC<Props> = ({ saveForm }) => {
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<button className="save" onClick={() => addArticle()}>SAVE</button>
+			<button className="save" type="button" onClick={() => addArticle()}>SAVE</button>
 		</form>
 	);
 }
