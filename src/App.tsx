@@ -19,7 +19,6 @@ const App = () => {
 	const [searchCategory, setSearchCategory] = useState<string>("");
 	const [categories, setCategories] = useState<string[]>();
 	const [searchName, setSearchName] = useState<string>("");
-	const [selectedArticle2, setSelectedArticle2] = useState<Article>();
 
 	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);
@@ -46,11 +45,6 @@ const App = () => {
 		setShowFilterBox(true)
 		setShowAddButton(true)
 		setShowEditButton(true)
-	}
-
-	const onClickArticle = (article: Article) => {
-		setSelectedArticle2(article)
-		setShowText(!showText)
 	}
 
 	// i don't really need this function, but it's here just in case
@@ -116,7 +110,7 @@ const App = () => {
 				<ul>
 					{articles?.map(article =>
 						<div className='article' key={article.id}>
-							<button onClick={() => onClickArticle(article)}>
+							<button onClick={() => setShowText(!showText)}>
 								<li>
 									<div className='info'>
 										<h2>{article.name}</h2>
@@ -126,7 +120,7 @@ const App = () => {
 								</li>
 							</button>
 
-							{showText && selectedArticle2 && <div className='box'>
+							{showText && <div className='box'>
 								<div className="buttons">
 									<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
 									{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
