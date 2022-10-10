@@ -19,6 +19,7 @@ const App = () => {
 	const [searchCategory, setSearchCategory] = useState<string>("");
 	const [categories, setCategories] = useState<string[]>();
 	const [searchName, setSearchName] = useState<string>("");
+	const [selectedArticle2, setSelectedArticle2] = useState<Article>();
 
 	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);
@@ -47,6 +48,11 @@ const App = () => {
 		setShowEditButton(true)
 	}
 
+	const onClickArticle = (article: Article) => {
+		setSelectedArticle2(article)
+		setShowText(!showText)
+	}
+
 	// i don't really need this function, but it's here just in case
 	useEffect(() => {
 		if (showAddBox === false && showEditBox === false) {
@@ -73,17 +79,22 @@ const App = () => {
 		getArticles()
 	}, [searchName, searchCategory])
 
+	const saveForm = () => {
+		onClickClose()
+		getArticles()
+	}
+
 
 	return (
 		<div className="App">
 			<div className="header">
 				<div className="for-flex-purposes">
-					<h1><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
-					{showCloseButton && <Button size='small' variant='contained' color='error' onClick={() => onClickClose()}>CLOSE</Button>}
-					{showAddButton && <Button size='small' variant='contained' color='success' onClick={() => onClickAdd()}>ADD</Button>}
+					<h1 className='title'><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
+					{showCloseButton && <button className='close' onClick={() => onClickClose()}>CLOSE</button>}
+					{showAddButton && <button className='add' onClick={() => onClickAdd()}>ADD</button>}
 				</div>
 				{showFilterBox && <div className="filter-box">
-					<FormControl sx={{ minWidth: 100, margin: .5, marginRight: 0 }} size="small">
+					<FormControl sx={{ minWidth: 100, margin: .5, marginRight: 0, backgroundColor: 'rgb(238, 238, 238)' }} size="small">
 						<InputLabel id="demo-simple-select-label">Category</InputLabel>
 						<Select
 							id="demo-simple-select-label"
@@ -93,11 +104,11 @@ const App = () => {
 							{articles?.map(article => <MenuItem value={article.category}>{article.category}</MenuItem>)}
 						</Select>
 					</FormControl>
-					<TextField sx={{ margin: .5 }} autoComplete='off' size="small" value={searchName}
+					<TextField sx={{ margin: .5, backgroundColor: 'rgb(238, 238, 238)' }} autoComplete='off' size="small" value={searchName}
 						onChange={(e) => setSearchName(e.target.value)} />
 				</div>}
-				{showAddBox && <AddArticle></AddArticle>}
-				{showEditBox && selectedArticle && <EditArticle selectedArticle={selectedArticle}></EditArticle>}
+				{showAddBox && <AddArticle saveForm={saveForm}></AddArticle>}
+				{showEditBox && selectedArticle && <EditArticle selectedArticle={selectedArticle} saveForm={saveForm}></EditArticle>}
 			</div>
 			<div className="header-hitbox"></div>
 
@@ -105,7 +116,7 @@ const App = () => {
 				<ul>
 					{articles?.map(article =>
 						<div className='article' key={article.id}>
-							<button onClick={() => setShowText(!showText)}>
+							<button onClick={() => onClickArticle(article)}>
 								<li>
 									<div className='info'>
 										<h2>{article.name}</h2>
@@ -115,7 +126,7 @@ const App = () => {
 								</li>
 							</button>
 
-							{showText && <div className='box'>
+							{showText && selectedArticle2 && <div className='box'>
 								<div className="buttons">
 									<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
 									{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
@@ -126,6 +137,10 @@ const App = () => {
 					)}
 				</ul>
 			</div>
+
+			<footer>
+				
+			</footer>
 		</div>
 	);
 }

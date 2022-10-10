@@ -1,9 +1,12 @@
-import { Button } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Article } from "../model/Article";
 
-const AddArticle = () => {
+export type Props = {
+	saveForm: () => void
+}
+
+const AddArticle: FC<Props> = ({ saveForm }) => {
 	const [name, setName] = useState<string>('')
 	const [category, setCategory] = useState<string>('')
 	const [picture, setPicture] = useState<string>('')
@@ -15,7 +18,8 @@ const AddArticle = () => {
 			return
 		}
 		axios.post("http://localhost:8080/articles", 
-		{ name: name, category: category, picture: picture, text: text });
+		{ name: name, category: category, picture: picture, text: text })
+		.then(() => saveForm())
 	}
 
 	return (
@@ -32,12 +36,12 @@ const AddArticle = () => {
 				<input type='text' placeholder="Picture URL" value={picture}
 					onChange={(e) => setPicture(e.target.value)} />
 			</div>
-			<div className="form-control">
+			<div className="form-textarea">
 				<textarea placeholder="Text" value={text}
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<Button size="small" variant="contained" color="success" onClick={() => addArticle()}>SAVE</Button>
+			<button className="save" onClick={() => addArticle()}>SAVE</button>
 		</form>
 	);
 }

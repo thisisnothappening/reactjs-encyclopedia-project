@@ -1,9 +1,13 @@
-import { Button, Card, TextField } from "@mui/material"
 import axios from "axios"
 import { FC, useEffect, useState } from "react"
 import { Article } from "../model/Article"
 
-const EditArticle = ({ selectedArticle }: { selectedArticle: Article }) => {
+export type Props = {
+	selectedArticle: Article,
+	saveForm: () => void
+}
+
+const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 	const [name, setName] = useState<string>(selectedArticle.name)
 	const [category, setCategory] = useState<string>(selectedArticle.category)
 	const [picture, setPicture] = useState<string>(selectedArticle.picture)
@@ -15,7 +19,8 @@ const EditArticle = ({ selectedArticle }: { selectedArticle: Article }) => {
 			return
 		}
 		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`, 
-		{ name: name, category: category, picture: picture, text: text });
+		{ name: name, category: category, picture: picture, text: text })
+		.then(() => saveForm())
 	}
 
 	return (
@@ -32,12 +37,12 @@ const EditArticle = ({ selectedArticle }: { selectedArticle: Article }) => {
 				<input type='text' placeholder="Picture URL" value={picture}
 					onChange={(e) => setPicture(e.target.value)} />
 			</div>
-			<div className="form-control">
+			<div className="form-textarea">
 				<textarea placeholder="Text" value={text}
 					onChange={(e) => setText(e.target.value)} />
 			</div>
 
-			<Button size="small" variant="contained" color="success" onClick={() => editArticle()}>SAVE</Button>
+			<button className="save" onClick={() => editArticle()}>SAVE</button>
 		</form>
 	)
 }
