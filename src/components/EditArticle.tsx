@@ -9,7 +9,7 @@ export type Props = {
 
 const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 	const [name, setName] = useState<string>(selectedArticle.name)
-	const [category, setCategory] = useState<string>(selectedArticle.category)
+	const [category, setCategory] = useState<string>(selectedArticle.category.name)
 	const [picture, setPicture] = useState<string>(selectedArticle.picture)
 	const [text, setText] = useState<string>(selectedArticle.text)
 

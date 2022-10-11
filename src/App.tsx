@@ -5,9 +5,11 @@ import { Article } from './model/Article';
 import AddArticle from './components/AddArticle';
 import axios from 'axios';
 import EditArticle from './components/EditArticle';
+import { Category } from './model/Category';
 
 const App = () => {
 	const [articles, setArticles] = useState<Article[]>();
+	const [categories, setCategories] = useState<Category[]>();
 	const [selectedArticle, setSelectedArticle] = useState<Article>();
 	const [showText, setShowText] = useState(false);
 	const [showAddBox, setShowAddBox] = useState(false);
@@ -16,8 +18,7 @@ const App = () => {
 	const [showCloseButton, setShowCloseButton] = useState(false);
 	const [showAddButton, setShowAddButton] = useState(true);
 	const [showEditButton, setShowEditButton] = useState(true);
-	const [searchCategory, setSearchCategory] = useState<string>("");
-	const [categories, setCategories] = useState<string[]>();
+	const [searchCategory, setSearchCategory] = useState<string | undefined>("");
 	const [searchName, setSearchName] = useState<string>("");
 
 	const onClickEdit = (article: Article) => {
@@ -58,6 +59,7 @@ const App = () => {
 		axios.delete(`http://localhost:8080/articles/${article.id}`)
 			.then(() => {
 				getArticles()
+				getCategories()
 			})
 			.catch(error => {
 				console.log(error.response)
@@ -69,13 +71,20 @@ const App = () => {
 			.then((response) => setArticles(response.data))
 	}
 
+	const getCategories = () => {
+		axios.get(`http://localhost:8080/categories`)
+			.then((response) => setCategories(response.data))
+	}
+
 	useEffect(() => {
 		getArticles()
+		getCategories()
 	}, [searchName, searchCategory])
 
 	const saveForm = () => {
 		onClickClose()
 		getArticles()
+		getCategories()
 	}
 
 
@@ -95,7 +104,8 @@ const App = () => {
 							value={searchCategory}
 							onChange={(e) => setSearchCategory(e.target.value)}
 						>
-							{articles?.map(article => <MenuItem value={article.category}>{article.category}</MenuItem>)}
+							<MenuItem value="">All</MenuItem>
+							{categories?.map(category => <MenuItem value={category.name}>{category.name}</MenuItem>)}
 						</Select>
 					</FormControl>
 					<TextField sx={{ margin: .5, backgroundColor: 'rgb(238, 238, 238)' }} autoComplete='off' size="small" value={searchName}
@@ -114,7 +124,7 @@ const App = () => {
 								<li>
 									<div className='info'>
 										<h2>{article.name}</h2>
-										<p>{article.category}</p>
+										<p>{article.category.name}</p>
 									</div>
 									<img src={article.picture} />
 								</li>
@@ -131,10 +141,6 @@ const App = () => {
 					)}
 				</ul>
 			</div>
-
-			<footer>
-				
-			</footer>
 		</div>
 	);
 }
