@@ -107,6 +107,7 @@ input {
 	width: 18em;
 	background-color: rgb(238, 238, 238);
 	box-shadow: 1px 1px rgb(179, 178, 178);
+	text-align: center;
 }
 
 textarea {

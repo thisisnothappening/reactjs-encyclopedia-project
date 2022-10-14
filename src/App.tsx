@@ -11,7 +11,7 @@ const App = () => {
 	const [articles, setArticles] = useState<Article[]>();
 	const [categories, setCategories] = useState<Category[]>();
 	const [selectedArticle, setSelectedArticle] = useState<Article>();
-	const [showText, setShowText] = useState(false);
+	const [showText, setShowText] = useState<number>(-1);
 	const [showAddBox, setShowAddBox] = useState(false);
 	const [showEditBox, setShowEditBox] = useState(false);
 	const [showFilterBox, setShowFilterBox] = useState(true);
@@ -67,7 +67,7 @@ const App = () => {
 	}
 
 	const getArticles = () => {
-		axios.get(`http://localhost:8080/articles?name=${searchName}&category=${searchCategory}`)
+		axios.get(`http://localhost:8080/articles?name=${searchName}` + (searchCategory && searchCategory?.length > 0 ? `&category=${searchCategory}` : ``))
 			.then((response) => setArticles(response.data))
 	}
 
@@ -118,27 +118,27 @@ const App = () => {
 
 			<div className="article-list">
 				<ul>
-					{articles?.map(article =>
-						<div className='article' key={article.id}>
-							<button onClick={() => setShowText(!showText)}>
-								<li>
-									<div className='info'>
-										<h2>{article.name}</h2>
-										<p>{article.category.name}</p>
-									</div>
-									<img src={article.picture} />
-								</li>
-							</button>
+						{articles?.map(article =>
+							<div className='article' key={article.id}>
+								<button onClick={() => article.id === showText ? setShowText(-1) : setShowText(article.id)}>
+									<li>
+										<div className='info'>
+											<h2>{article.name}</h2>
+											<p>{article.category.name}</p>
+										</div>
+										<img src={article.picture} />
+									</li>
+								</button>
 
-							{showText && <div className='box'>
-								<div className="buttons">
-									<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
-									{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
-								</div>
-								<p>{article.text}</p>
-							</div>}
-						</div>
-					)}
+								{showText === article.id && <div className='box'>
+									<div className="buttons">
+										<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
+										{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
+									</div>
+									<p>{article.text}</p>
+								</div>}
+							</div>
+						)}
 				</ul>
 			</div>
 		</div>
