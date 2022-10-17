@@ -1,4 +1,7 @@
-html, body, #root, #root>div {
+html,
+body,
+#root,
+#root>div {
 	height: 100vh;
 	width: 100vw;
 }
@@ -45,6 +48,45 @@ body {
 	font-size: 1.7em;
 }
 
+.filter-box {
+	padding: 4px;
+	display: flex;
+	justify-content: center;
+}
+
+select {
+	width: 150px;
+	height: 27px;
+	background-color: rgb(238, 238, 238);
+	box-shadow: 2px 2px rgb(179, 178, 178);
+	border: thin solid rgb(179, 179, 179);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-right: 3px;
+}
+
+select:hover {
+	background-color: rgb(231, 230, 230);
+}
+
+.article-search {
+	width: 144px;
+	height: 23px;
+	background-color: rgb(238, 238, 238);
+	box-shadow: 2px 2px rgb(179, 178, 178);
+	border: thin solid rgb(179, 179, 179);
+	border-radius: 5px;
+	text-align: center;
+	margin-left: 3px;
+}
+
+input:hover {
+	background-color: rgb(231, 230, 230);
+}
+
 .add {
 	width: 5em;
 	height: 2.5em;
@@ -58,7 +100,7 @@ body {
 }
 
 .add:hover {
-	background-color: rgb(55, 138, 7);;
+	background-color: rgb(55, 138, 7);
 	cursor: pointer;
 }
 
@@ -100,10 +142,10 @@ body {
 	margin-bottom: .3em;
 }
 
-input {
+.add-edit-input {
 	border: thin solid rgb(179, 179, 179);
 	border-radius: 5px;
-	height: 1.7em;
+	height: 23px;
 	width: 18em;
 	background-color: rgb(238, 238, 238);
 	box-shadow: 1px 1px rgb(179, 178, 178);
@@ -115,9 +157,13 @@ textarea {
 	border-radius: 5px;
 	margin-top: 0;
 	width: 18em;
-	height: 1.7em;
+	height: 23px;
 	background-color: rgb(238, 238, 238);
 	box-shadow: 1px 1px rgb(179, 178, 178);
+}
+
+textarea:hover {
+	background-color: rgb(231, 230, 230);
 }
 
 ::placeholder {
@@ -157,6 +203,8 @@ textarea {
 	background-color: rgb(243, 235, 224);
 	box-shadow: 3px 3px rgb(179, 178, 178);
 	border: thin solid rgb(8, 8, 8);
+	list-style-type: none;
+	justify-content: space-between;
 }
 
 .article-list button:hover {
@@ -164,22 +212,9 @@ textarea {
 	cursor: pointer;
 }
 
-.article-list button li {
-	width: inherit;
-	height: inherit;
-	list-style-type: none;
-	display: flex;
-	justify-content: space-between;
-	border-radius: inherit;
-}
-
-.info h2, p {
+.info h2,
+p {
 	margin: .5em;
-}
-
-.info {
-	display: grid;
-	justify-content: space-between;
 }
 
 .article-list img {

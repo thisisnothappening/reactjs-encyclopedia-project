@@ -14,27 +14,33 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 	const [text, setText] = useState<string>(selectedArticle.text)
 
 	const editArticle = () => {
-		if (!name || !category || !picture || !text) {
+		if (!name || name.trim().length === 0 ||
+			!category || category.trim().length === 0 ||
+			!picture || picture.trim().length === 0 ||
+			!text || text.trim().length === 0) {
 			alert('All fields are mandatory!')
 			return
 		}
-		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`, 
-		{ name: name, category: category, picture: picture, text: text })
-		.then(() => saveForm())
+		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`,
+			{ name: name, category: category, picture: picture, text: text })
+			.then(() => saveForm())
+			.catch(error => {
+				console.log(error.response)
+			})
 	}
 
 	return (
 		<form className="EditArticle">
 			<div className="form-control">
-				<input type='text' placeholder='Title' value={name}
+				<input type='text' className="add-edit-input" placeholder='Title' value={name}
 					onChange={(e) => setName(e.target.value)} />
 			</div>
 			<div className="form-control">
-				<input type='text' placeholder='Category' value={category}
+				<input type='text' className="add-edit-input" placeholder='Category' value={category}
 					onChange={(e) => setCategory(e.target.value)} />
 			</div>
 			<div className="form-control">
-				<input type='text' placeholder="Picture URL" value={picture}
+				<input type='text' className="add-edit-input" placeholder="Picture URL" value={picture}
 					onChange={(e) => setPicture(e.target.value)} />
 			</div>
 			<div className="form-textarea">

@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-import { Box, Button, Card, CardContent, CardHeader, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { Article } from './model/Article';
 import AddArticle from './components/AddArticle';
 import axios from 'axios';
@@ -69,11 +68,17 @@ const App = () => {
 	const getArticles = () => {
 		axios.get(`http://localhost:8080/articles?name=${searchName}` + (searchCategory && searchCategory?.length > 0 ? `&category=${searchCategory}` : ``))
 			.then((response) => setArticles(response.data))
+			.catch(error => {
+				console.log(error.response)
+			})
 	}
 
 	const getCategories = () => {
 		axios.get(`http://localhost:8080/categories`)
 			.then((response) => setCategories(response.data))
+			.catch(error => {
+				console.log(error.response)
+			})
 	}
 
 	useEffect(() => {
@@ -97,19 +102,13 @@ const App = () => {
 					{showAddButton && <button className='add' onClick={() => onClickAdd()}>ADD</button>}
 				</div>
 				{showFilterBox && <div className="filter-box">
-					<FormControl sx={{ minWidth: 100, margin: .5, marginRight: 0, backgroundColor: 'rgb(238, 238, 238)' }} size="small">
-						<InputLabel id="demo-simple-select-label">Category</InputLabel>
-						<Select
-							id="demo-simple-select-label"
-							value={searchCategory}
-							onChange={(e) => setSearchCategory(e.target.value)}
-						>
-							<MenuItem value="">All</MenuItem>
-							{categories?.map(category => <MenuItem value={category.name}>{category.name}</MenuItem>)}
-						</Select>
-					</FormControl>
-					<TextField sx={{ margin: .5, backgroundColor: 'rgb(238, 238, 238)' }} autoComplete='off' size="small" value={searchName}
-						onChange={(e) => setSearchName(e.target.value)} />
+					<div>
+						<select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)}>
+							<option value="">All</option>
+							{categories?.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
+						</select>
+					</div>
+					<input type="text" className='article-search' placeholder='Search...' value={searchName} onChange={(e) => setSearchName(e.target.value)} />
 				</div>}
 				{showAddBox && <AddArticle saveForm={saveForm}></AddArticle>}
 				{showEditBox && selectedArticle && <EditArticle selectedArticle={selectedArticle} saveForm={saveForm}></EditArticle>}
@@ -118,27 +117,25 @@ const App = () => {
 
 			<div className="article-list">
 				<ul>
-						{articles?.map(article =>
-							<div className='article' key={article.id}>
-								<button onClick={() => article.id === showText ? setShowText(-1) : setShowText(article.id)}>
-									<li>
-										<div className='info'>
-											<h2>{article.name}</h2>
-											<p>{article.category.name}</p>
-										</div>
-										<img src={article.picture} />
-									</li>
-								</button>
+					{articles?.map(article =>
+						<div className='article' key={article.id}>
+							<button onClick={() => article.id === showText ? setShowText(-1) : setShowText(article.id)}>
+								<div className='info'>
+									<h2>{article.name}</h2>
+									<p>{article.category.name}</p>
+								</div>
+								<img src={article.picture} />
+							</button>
 
-								{showText === article.id && <div className='box'>
-									<div className="buttons">
-										<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
-										{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
-									</div>
-									<p>{article.text}</p>
-								</div>}
-							</div>
-						)}
+							{showText === article.id && <div className='box'>
+								<div className="buttons">
+									<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
+									{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
+								</div>
+								<p>{article.text}</p>
+							</div>}
+						</div>
+					)}
 				</ul>
 			</div>
 		</div>
