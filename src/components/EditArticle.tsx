@@ -23,7 +23,10 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 		}
 		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`,
 			{ name: name, category: category, picture: picture, text: text })
-			.then(() => saveForm())
+			.then((article) => {
+				saveForm()
+				console.log(article)
+			})
 			.catch(error => {
 				console.log(error.response)
 			})

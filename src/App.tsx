@@ -56,9 +56,10 @@ const App = () => {
 
 	const deleteArticle = (article: Article) => {
 		axios.delete(`http://localhost:8080/articles/${article.id}`)
-			.then(() => {
+			.then((article) => {
 				getArticles()
 				getCategories()
+				console.log(article)
 			})
 			.catch(error => {
 				console.log(error.response)
@@ -67,17 +68,23 @@ const App = () => {
 
 	const getArticles = () => {
 		axios.get(`http://localhost:8080/articles?name=${searchName}` + (searchCategory && searchCategory?.length > 0 ? `&category=${searchCategory}` : ``))
-			.then((response) => setArticles(response.data))
-			.catch(error => {
-				console.log(error.response)
+			.then((res) => {
+				setArticles(res.data)
+				console.log(res)
+			})
+			.catch(err => {
+				console.log(err.response)
 			})
 	}
 
 	const getCategories = () => {
 		axios.get(`http://localhost:8080/categories`)
-			.then((response) => setCategories(response.data))
-			.catch(error => {
-				console.log(error.response)
+			.then((res) => {
+				setCategories(res.data)
+				console.log(res)
+			})
+			.catch(err => {
+				console.log(err.response)
 			})
 	}
 

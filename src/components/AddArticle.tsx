@@ -22,7 +22,10 @@ const AddArticle: FC<Props> = ({ saveForm }) => {
 		}
 		axios.post("http://localhost:8080/articles",
 			{ name: name, category: category, picture: picture, text: text })
-			.then(() => saveForm())
+			.then((article) => {
+				saveForm()
+				console.log(article)
+			})
 			.catch(error => {
 				console.log(error.response)
 			})
