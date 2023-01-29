@@ -1,8 +1,8 @@
 import axios from "axios"
-import { FC, useEffect, useState } from "react"
-import { Article } from "../model/Article"
+import { FC, useState } from "react"
+import { Article } from "../../model/Article"
 
-export type Props = {
+type Props = {
 	selectedArticle: Article,
 	saveForm: () => void
 }
@@ -35,15 +35,15 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 	return (
 		<form className="EditArticle">
 			<div className="form-control">
-				<input type='text' className="add-edit-input" placeholder='Title' value={name}
+				<input type='text' className="form-input" placeholder='Title' value={name}
 					onChange={(e) => setName(e.target.value)} />
 			</div>
 			<div className="form-control">
-				<input type='text' className="add-edit-input" placeholder='Category' value={category}
+				<input type='text' className="form-input" placeholder='Category' value={category}
 					onChange={(e) => setCategory(e.target.value)} />
 			</div>
 			<div className="form-control">
-				<input type='text' className="add-edit-input" placeholder="Picture URL" value={picture}
+				<input type='text' className="form-input" placeholder="Picture URL" value={picture}
 					onChange={(e) => setPicture(e.target.value)} />
 			</div>
 			<div className="form-textarea">
