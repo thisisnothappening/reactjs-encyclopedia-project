@@ -1,0 +1,30 @@
+import { Dispatch, SetStateAction } from "react";
+import { Article } from "../model/Article";
+import { Category } from "../model/Category";
+
+export interface GlobalProps {
+	showCloseButton: boolean;
+	showAddButton: boolean;
+	showFilterBox: boolean;
+	showText: number;
+	searchCategory: string | undefined;
+	articles: Article[] | undefined;
+	categories: Category[] | undefined;
+	searchName: string;
+	showAddBox: boolean;
+	showEditBox: boolean;
+	showEditButton: boolean;
+	selectedArticle: Article | undefined;
+	saveForm: () => void;
+	onClickClose: () => void;
+	onClickAdd: () => void;
+	onClickEdit: (article: Article) => void;
+	setSearchName: Dispatch<SetStateAction<string>>;
+	setSearchCategory: Dispatch<SetStateAction<string | undefined>>;
+	setShowFilterBox: Dispatch<SetStateAction<boolean>>;
+	setShowText: Dispatch<SetStateAction<number>>;
+	setShowEditButton: Dispatch<SetStateAction<boolean>>;
+	getArticles: () => void;
+	getCategories: () => void;
+	deleteArticle: (article: Article) => void;
+};

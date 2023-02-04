@@ -1,36 +1,37 @@
 import axios from "axios"
-import { FC, useState } from "react"
-import { Article } from "../../model/Article"
+import { FC, useContext, useState } from "react";
+import { ContextContainer } from "../../App";
+import { GlobalProps } from "../../interface/GlobalProps";
+import { Article } from "../../model/Article";
 
-type Props = {
-	selectedArticle: Article,
-	saveForm: () => void
-}
+const EditArticle = () => {
+	const props = useContext(ContextContainer) as GlobalProps;
+	const selectedArticle = props.selectedArticle;
+	const saveForm = props.saveForm;
 
-const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
-	const [name, setName] = useState<string>(selectedArticle.name)
-	const [category, setCategory] = useState<string>(selectedArticle.category.name)
-	const [picture, setPicture] = useState<string>(selectedArticle.picture)
-	const [text, setText] = useState<string>(selectedArticle.text)
+	const [name, setName] = useState<string>(selectedArticle?.name || "");
+	const [category, setCategory] = useState<string>(selectedArticle?.category.name || "");
+	const [picture, setPicture] = useState<string>(selectedArticle?.picture || "");
+	const [text, setText] = useState<string>(selectedArticle?.text || "");
 
 	const editArticle = () => {
 		if (!name || name.trim().length === 0 ||
 			!category || category.trim().length === 0 ||
 			!picture || picture.trim().length === 0 ||
 			!text || text.trim().length === 0) {
-			alert('All fields are mandatory!')
-			return
+			alert('All fields are mandatory!');
+			return;
 		}
-		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`,
+		axios.put(`http://localhost:8080/articles/${selectedArticle?.id}`,
 			{ name: name, category: category, picture: picture, text: text })
 			.then((article) => {
-				saveForm()
-				console.log(article)
+				saveForm();
+				console.log(article);
 			})
 			.catch(error => {
-				console.log(error.response)
-			})
-	}
+				console.log(error.response);
+			});
+	};
 
 	return (
 		<form className="EditArticle">
@@ -53,7 +54,7 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 
 			<button className="save" type="button" onClick={() => editArticle()}>SAVE</button>
 		</form>
-	)
-}
+	);
+};
 
 export default EditArticle;

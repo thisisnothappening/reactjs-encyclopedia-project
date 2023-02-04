@@ -1,12 +1,13 @@
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
+import { ContextContainer } from "../../App";
+import { GlobalProps } from "../../interface/GlobalProps";
 import { Article } from "../../model/Article";
 
-type Props = {
-	saveForm: () => void
-}
+const AddArticle = () => {
+	const props = useContext(ContextContainer) as GlobalProps;
+	const saveForm = props.saveForm;
 
-const AddArticle: FC<Props> = ({ saveForm }) => {
 	const [name, setName] = useState<string>('')
 	const [category, setCategory] = useState<string>('')
 	const [picture, setPicture] = useState<string>('')
