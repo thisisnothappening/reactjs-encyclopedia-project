@@ -66,7 +66,12 @@ const Home = () => {
 	}
 
 	const getArticles = () => {
-		axios.get(`http://localhost:8080/articles?name=${searchName}` + (searchCategory && searchCategory?.length > 0 ? `&category=${searchCategory}` : ``))
+		axios.get(`http://localhost:8080/articles`, {
+			params: {
+				name: searchName || "",
+				category: searchCategory || "",
+			}
+		})
 			.then((res) => {
 				setArticles(res.data)
 				console.log(res)
