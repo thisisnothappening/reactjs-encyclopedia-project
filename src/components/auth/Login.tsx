@@ -24,7 +24,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 			})
 			.catch(err => {
 				console.log(err.response);
-				alert(err);
+				alert("Something went wrong! Check the console.");
 			});
 	};
 
