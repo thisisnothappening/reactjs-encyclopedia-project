@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthProvider";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -12,6 +13,8 @@ const Auth = () => {
 	const [showRegisterForm, setShowRegisterForm] = useState(false);
 	const [showLoginForm, setShowLoginForm] = useState(true);
 	const [showAccount, setShowAccount] = useState(false);
+
+	const { auth } = useContext(AuthContext);
 
 	const onClickRegisterButton = () => {
 		setShowRegisterButton(false);
@@ -33,7 +36,7 @@ const Auth = () => {
 
 	const onClickLogoutButton = () => {
 		setShowRegisterButton(true);
-		setShowLoginButton(true);
+		setShowLoginButton(false);
 		setShowLogoutButton(false);
 		setShowRegisterForm(false);
 		setShowLoginForm(true);
@@ -50,15 +53,27 @@ const Auth = () => {
 	};
 
 	const logout = () => {
-		axios.get("http://localhost:8080/logout")
+		axios.get(
+			"http://localhost:8080/logout",
+			{ withCredentials: true }
+		)
 			.then(() => {
-				onClickLogoutButton()
+				onClickLogoutButton();
+				window.location.reload();
 			})
 			.catch(err => {
-				console.log(err.response)
-				alert(err)
-			})
+				console.log(err.response);
+				alert(err);
+			});
 	};
+
+	useEffect(() => {
+		if (auth.length > 0) {
+			onClickSaveButton();
+		} else {
+			onClickLogoutButton();
+		}
+	}, []);
 
 
 	return (
@@ -70,7 +85,7 @@ const Auth = () => {
 				{showLogoutButton && <button className='logout-button' onClick={() => logout()}>LOGOUT</button>}
 				{showLoginForm && <Login onClickSaveButton={onClickSaveButton} />}
 				{showRegisterForm && <Register onClickSaveButton={onClickSaveButton} />}
-				{showAccount && <h1>WELCOME</h1>}
+				{showAccount && <h1 className="login-welcome-text">WELCOME</h1>}
 			</div>
 		</div>
 	);

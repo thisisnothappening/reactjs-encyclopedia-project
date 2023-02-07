@@ -332,12 +332,14 @@ footer {
 
 .auth-form {
 	border: 1px solid black;
+	border-radius: 20px;
+	box-shadow: 2px 2px rgb(179, 178, 178);
 	margin: auto;
 	margin-top: 50px;
-	padding: 70px 0;
-	width: 50%;
-	height: 50%;
+	padding: 30px 0;
+	width: 300px;
 	text-align: center;
+	background-color: rgb(243, 235, 224);
 }
 
 .register-button {
@@ -359,8 +361,8 @@ footer {
 }
 
 .login-button {
-	width: 65px;
-	height: 28px;
+	width: 80px;
+	height: 33px;
 	text-align: center;
 	background-color: rgb(31, 115, 224);
 	border-radius: 5px;
@@ -368,7 +370,6 @@ footer {
 	border: none;
 	color: white;
 	text-decoration: none;
-	padding-top: 5px;
 	margin-right: 5px;
 }
 
@@ -378,7 +379,7 @@ footer {
 }
 
 .logout-button {
-	width: 65px;
+	width: 80px;
 	height: 33px;
 	text-align: center;
 	background-color: rgb(241, 64, 64);
@@ -403,6 +404,16 @@ footer {
 	background-color: rgb(238, 238, 238);
 	box-shadow: 1px 1px rgb(179, 178, 178);
 	text-align: center;
+}
+
+.login-welcome-text {
+	width: 160px;
+	margin: 30px auto auto auto;
+}
+
+.login-welcome-text:hover {
+	color: rgb(123, 52, 133);
+	cursor: default;
 }
 
 

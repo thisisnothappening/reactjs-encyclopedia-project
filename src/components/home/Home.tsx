@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Article } from '../../model/Article';
 import AddArticle from './AddArticle';
 import axios from 'axios';
 import EditArticle from './EditArticle';
 import { Category } from '../../model/Category';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthProvider';
 
 const Home = () => {
 	const [articles, setArticles] = useState<Article[]>();
@@ -19,6 +20,9 @@ const Home = () => {
 	const [showEditButton, setShowEditButton] = useState(true);
 	const [searchCategory, setSearchCategory] = useState<string | undefined>("");
 	const [searchName, setSearchName] = useState<string>("");
+
+	const { auth } = useContext(AuthContext);
+	const isAuth = auth.length > 0;
 
 	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);
@@ -110,7 +114,7 @@ const Home = () => {
 					<h1 className='title'><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
 					<Link to="/auth" className='editor-button'>EDITOR</Link>
 					{showCloseButton && <button className='close' onClick={() => onClickClose()}>CLOSE</button>}
-					{showAddButton && <button className='add' onClick={() => onClickAdd()}>ADD</button>}
+					{showAddButton && isAuth && <button className='add' onClick={() => onClickAdd()}>ADD</button>}
 				</div>
 				{showFilterBox && <div className="filter-box">
 					<div>
@@ -139,10 +143,10 @@ const Home = () => {
 							</button>
 
 							{showText === article.id && <div className='box'>
-								<div className="buttons">
+								{isAuth && <div className="buttons">
 									<button className='delete' onClick={() => deleteArticle(article)}>DELETE</button>
 									{showEditButton && <button className='edit' onClick={() => onClickEdit(article)}>EDIT</button>}
-								</div>
+								</div>}
 								<p>{article.text}</p>
 							</div>}
 						</div>

@@ -1,5 +1,6 @@
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 
 type Props = {
 	onClickSaveButton: () => void;
@@ -9,17 +10,22 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
+	const { setAuth } = useContext(AuthContext);
+
 	const login = () => {
-		axios.post("http://localhost:8080/login",
-			{ email: email, password: password })
+		axios.post(
+			"http://localhost:8080/login",
+			{ email: email, password: password },
+			{ withCredentials: true }
+		)
 			.then((token) => {
-				onClickSaveButton()
-				console.log(token)
+				onClickSaveButton();
+				window.location.reload();
 			})
 			.catch(err => {
-				console.log(err.response)
-				alert(err)
-			})
+				console.log(err.response);
+				alert(err);
+			});
 	};
 
 	return (
@@ -31,7 +37,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 						onChange={(e) => setEmail(e.target.value)} />
 				</div>
 				<div className="form-control">
-					<input type='text' className="auth-input" placeholder="Password" value={password}
+					<input type='password' className="auth-input" placeholder="Password" value={password}
 						onChange={(e) => setPassword(e.target.value)} />
 				</div>
 				<button className="save" type="button" onClick={() => login()}>SAVE</button>
