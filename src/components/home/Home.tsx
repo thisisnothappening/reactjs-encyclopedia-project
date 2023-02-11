@@ -21,8 +21,8 @@ const Home = () => {
 	const [searchCategory, setSearchCategory] = useState<string | undefined>("");
 	const [searchName, setSearchName] = useState<string>("");
 
-	const { auth } = useContext(AuthContext);
-	const isAuth = auth.length > 0;
+	const { token } = useContext(AuthContext);
+	const isAuth = token.length > 0;
 
 	const onClickEdit = (article: Article) => {
 		setSelectedArticle(article);

@@ -3,4 +3,7 @@ export interface User {
 	email: string;
 	username: string;
 	password: string;
-}
+	refreshToken: string;
+	createdAt: string;
+	updatedAt: string;
+};

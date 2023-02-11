@@ -10,8 +10,8 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
-	const register = () => {
-		axios.post("http://localhost:8080/register",
+	const register = async () => {
+		await axios.post("http://localhost:8080/register",
 			{ email: email, username: username, password: password })
 			.then((user) => {
 				onClickSaveButton()
@@ -20,7 +20,25 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 			.catch(err => {
 				console.log(err.response)
 				alert(err)
+			});
+		login();
+	};
+
+	// maybe I should not log in directly after i registered ?
+	const login = () => {
+		axios.post(
+			"http://localhost:8080/login",
+			{ email: email, password: password },
+			{ withCredentials: true }
+		)
+			.then((res) => {
+				onClickSaveButton();
+				window.location.reload();
 			})
+			.catch(err => {
+				console.log(err.response);
+				alert("Something went wrong! Check the console.");
+			});
 	};
 
 	return (
@@ -36,13 +54,13 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 					onChange={(e) => setUsername(e.target.value)} />
 				</div>
 				<div className="form-control">
-					<input type='text' className="auth-input" placeholder="Password" value={password}
+					<input type='password' className="auth-input" placeholder="Password" value={password}
 					onChange={(e) => setPassword(e.target.value)} />
 				</div>
 				<button className="save" type="button" onClick={() => register()}>SAVE</button>
 			</form>
 		</div>
 	);
-}
+};
 
 export default Register;

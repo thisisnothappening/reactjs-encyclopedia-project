@@ -10,7 +10,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
-	const { setAuth } = useContext(AuthContext);
+	const { } = useContext(AuthContext);
 
 	const login = () => {
 		axios.post(
@@ -18,7 +18,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 			{ email: email, password: password },
 			{ withCredentials: true }
 		)
-			.then((token) => {
+			.then((res) => {
 				onClickSaveButton();
 				window.location.reload();
 			})
