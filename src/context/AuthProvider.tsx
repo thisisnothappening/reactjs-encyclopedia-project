@@ -1,5 +1,5 @@
-import Cookies from "js-cookie";
-import { createContext, useState } from "react";
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 import { User } from "../model/User";
 
 const AuthContext = createContext<{
@@ -10,13 +10,29 @@ const AuthContext = createContext<{
 }>({
 	user: undefined,
 	setUser: () => { },
-	token: Cookies.get("token") || "",
+	token: "",
 	setToken: () => { },
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState<User | undefined>();
-	const [token, setToken] = useState<string>(Cookies.get("token") || "");
+	const [token, setToken] = useState<string>("");
+	// token = accessToken
+
+	useEffect(() => {
+		axios.get(
+			`http://localhost:8080/refresh`,
+			{ withCredentials: true }
+		)
+			.then((res) => {
+				console.log(res.data);
+				setUser(res.data.user);
+				setToken(res.data.accessToken);
+			})
+			.catch(error => {
+				console.log(error.response);
+			});
+	}, []);
 
 	return (
 		<AuthContext.Provider value={{ user, setUser, token, setToken }}>

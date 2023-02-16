@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Article } from "../../model/Article";
 
 type Props = {
@@ -11,28 +11,29 @@ const AddArticle: FC<Props> = ({ saveForm }) => {
 	const [category, setCategory] = useState<string>('')
 	const [picture, setPicture] = useState<string>('')
 	const [text, setText] = useState<string>('')
+	const [error, setError] = useState<string>("");
 
 	const addArticle = () => {
-		if (!name || name.trim().length === 0 ||
-			!category || category.trim().length === 0 ||
-			!picture || picture.trim().length === 0 ||
-			!text || text.trim().length === 0) {
-			alert('All fields are mandatory!')
-			return
-		}
 		axios.post("http://localhost:8080/articles",
 			{ name: name, category: category, picture: picture, text: text })
 			.then((article) => {
 				saveForm()
 				console.log(article)
 			})
-			.catch(error => {
-				console.log(error.response)
-			})
-	}
+			.catch(err => {
+				console.log(err.response)
+				setError(err.response.data.error);
+				console.log(error);
+			});
+	};
+
+	useEffect(() => {
+		setError("");
+	}, [name, category, picture, text]);
 
 	return (
 		<form className="AddArticle">
+			{error && <div className="error">{error}</div>}
 			<div className="form-control">
 				<input type='text' className="form-input" placeholder='Title' value={name}
 					onChange={(e) => setName(e.target.value)} />

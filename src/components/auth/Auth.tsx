@@ -65,7 +65,7 @@ const Auth = () => {
 			})
 			.catch(err => {
 				console.log(err.response);
-				alert(err);
+				alert("Something went wrong! Check the console.");
 			});
 	};
 
@@ -75,7 +75,7 @@ const Auth = () => {
 		} else {
 			onClickLogoutButton();
 		}
-	}, []);
+	}, [isAuth]);
 
 
 	return (

@@ -18,6 +18,14 @@ body {
 	width: 100%;
 }
 
+.error {
+	text-align: center;
+	margin: 10px 30px;
+	background-color: rgb(240, 132, 132);
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
 .header {
 	text-align: center;
 	border-bottom: thin solid rgb(0, 0, 0);
