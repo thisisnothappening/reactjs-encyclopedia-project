@@ -26,7 +26,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		)
 			.then((res) => {
 				console.log(res.data);
-				setUser(res.data.user);
+				setUser({
+					email: res.data.email,
+					username: res.data.username
+				});
 				setToken(res.data.accessToken);
 			})
 			.catch(error => {

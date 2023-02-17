@@ -16,7 +16,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 			{ email: email, password: password },
 			{ withCredentials: true }
 		)
-			.then((res) => {
+			.then(() => {
 				onClickSaveButton();
 				window.location.reload();
 			})

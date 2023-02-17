@@ -15,9 +15,8 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 	const register = async () => {
 		await axios.post("http://localhost:8080/register",
 			{ email: email, username: username, password: password, secretCode: secretCode })
-			.then((user) => {
+			.then(() => {
 				onClickSaveButton();
-				console.log(user);
 				login();
 			})
 			.catch(err => {
@@ -33,7 +32,7 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 			{ email: email, password: password },
 			{ withCredentials: true }
 		)
-			.then((res) => {
+			.then(() => {
 				onClickSaveButton();
 				window.location.reload();
 			})

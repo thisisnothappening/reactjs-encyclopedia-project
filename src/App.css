@@ -419,14 +419,45 @@ footer {
 	text-align: center;
 }
 
+.UserInfo {
+	text-align: left;
+}
+
 .login-welcome-text {
 	width: 160px;
-	margin: 30px auto auto auto;
+	margin: 30px auto 30px auto;
 }
 
 .login-welcome-text:hover {
 	color: rgb(123, 52, 133);
 	cursor: default;
+}
+
+.email-and-password {
+	background-color: rgb(203, 217, 248);
+	padding: 3px 0 3px 0;
+	border: 1px solid black;
+	border-width: 1px 0 1px 0;
+}
+
+.email-text {
+	background-color: rgb(238, 238, 238);
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.username-text {
+	background-color: rgb(238, 238, 238);
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.span-email {
+	margin-right: 50px;
+}
+
+.span-username {
+	margin-right: 17px;
 }
 
 
