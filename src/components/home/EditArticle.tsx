@@ -1,5 +1,6 @@
 import axios from "axios"
-import { FC, useEffect, useState } from "react"
+import { FC, useContext, useEffect, useState } from "react"
+import AuthContext from "../../context/AuthProvider"
 import { Article } from "../../model/Article"
 
 type Props = {
@@ -14,9 +15,12 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 	const [text, setText] = useState<string>(selectedArticle.text)
 	const [error, setError] = useState<string>("");
 
+	const { token } = useContext(AuthContext);
+
 	const editArticle = () => {
 		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`,
-			{ name: name, category: category, picture: picture, text: text })
+			{ name: name, category: category, picture: picture, text: text },
+			{ headers: { Authorization: `Bearer ${token}` } })
 			.then((article) => {
 				saveForm()
 				console.log(article)

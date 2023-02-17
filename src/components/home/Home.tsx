@@ -59,7 +59,8 @@ const Home = () => {
 	}, [showAddBox, showEditBox])
 
 	const deleteArticle = (article: Article) => {
-		axios.delete(`http://localhost:8080/articles/${article.id}`)
+		axios.delete(`http://localhost:8080/articles/${article.id}`,
+			{ headers: { Authorization: `Bearer ${token}` } })
 			.then(() => {
 				getArticles()
 				getCategories()
