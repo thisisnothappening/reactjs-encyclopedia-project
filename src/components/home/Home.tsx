@@ -64,10 +64,9 @@ const Home = () => {
 			.then(() => {
 				getArticles()
 				getCategories()
-				console.log("Article deleted")
 			})
 			.catch(error => {
-				console.log(error.response)
+				console.error(error.response)
 			})
 	}
 
@@ -82,7 +81,7 @@ const Home = () => {
 				setArticles(res.data)
 			})
 			.catch(err => {
-				console.log(err.response)
+				console.error(err.response)
 			})
 	}
 
@@ -92,7 +91,7 @@ const Home = () => {
 				setCategories(res.data)
 			})
 			.catch(err => {
-				console.log(err.response)
+				console.error(err.response)
 			})
 	}
 

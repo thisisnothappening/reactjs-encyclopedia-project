@@ -21,12 +21,11 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`,
 			{ name: name, category: category, picture: picture, text: text },
 			{ headers: { Authorization: `Bearer ${token}` } })
-			.then((article) => {
+			.then(() => {
 				saveForm()
-				console.log(article)
 			})
 			.catch(err => {
-				console.log(err.response)
+				console.error(err.response)
 				setError(err.response.data.error || err.response.data.message);
 			})
 	}

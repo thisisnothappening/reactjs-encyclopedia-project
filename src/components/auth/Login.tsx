@@ -21,7 +21,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 				window.location.reload();
 			})
 			.catch(err => {
-				console.log(err.response);
+				console.error(err.response);
 				setError(err.response.data.error || err.response.data.message);
 			});
 	};

@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			{ withCredentials: true }
 		)
 			.then((res) => {
-				console.log(res.data);
 				setUser({
 					email: res.data.email,
 					username: res.data.username
@@ -33,7 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				setToken(res.data.accessToken);
 			})
 			.catch(error => {
-				console.log(error.response);
+				console.error(error.response);
 			});
 	}, []);
 

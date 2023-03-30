@@ -64,7 +64,7 @@ const Auth = () => {
 				window.location.reload();
 			})
 			.catch(err => {
-				console.log(err.response);
+				console.error(err.response);
 				alert("Something went wrong! Check the console.");
 			});
 	};
