@@ -111,6 +111,7 @@ const Home = () => {
 		<div className="Home">
 			<div className="header">
 				<div className="for-flex-purposes">
+					<Link to="/about" className='about-button'>ABOUT</Link>
 					<h1 className='title'><span className='title-w'>W</span>ELCOME<span className='title-p'>P</span>EDIA</h1>
 					<Link to="/auth" className='editor-button'>EDITOR</Link>
 					{showCloseButton && <button className='close' onClick={() => onClickClose()}>CLOSE</button>}
@@ -152,6 +153,10 @@ const Home = () => {
 						</div>
 					)}
 				</ul>
+			</div>
+			<div className='footer-hitbox'></div>
+			<div className='footer'>
+				<Link to="/about" className='footer-about-button'>ABOUT</Link>
 			</div>
 		</div>
 	);
