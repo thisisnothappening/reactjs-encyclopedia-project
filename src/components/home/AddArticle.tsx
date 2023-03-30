@@ -1,17 +1,17 @@
 import axios from "axios";
 import { FC, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthProvider";
-import { Article } from "../../model/Article";
+//
 
 type Props = {
 	saveForm: () => void
 }
 
 const AddArticle: FC<Props> = ({ saveForm }) => {
-	const [name, setName] = useState<string>("")
-	const [category, setCategory] = useState<string>("")
-	const [picture, setPicture] = useState<string>("")
-	const [text, setText] = useState<string>("")
+	const [name, setName] = useState<string>("");
+	const [category, setCategory] = useState<string>("");
+	const [picture, setPicture] = useState<string>("");
+	const [text, setText] = useState<string>("");
 	const [error, setError] = useState<string>("");
 
 	const { token } = useContext(AuthContext);
@@ -21,12 +21,12 @@ const AddArticle: FC<Props> = ({ saveForm }) => {
 			{ name: name, category: category, picture: picture, text: text },
 			{ headers: { Authorization: `Bearer ${token}` } })
 			.then((article) => {
-				saveForm()
-				console.log(article)
+				saveForm();
+				console.log(article);
 			})
 			.catch(err => {
-				console.log(err.response)
-				setError(err.response.data.error);
+				console.log(err.response);
+				setError(err.response.data.error || err.response.data.message);
 			});
 	};
 

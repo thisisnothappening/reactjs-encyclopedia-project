@@ -21,12 +21,12 @@ const Home = () => {
 	const [searchCategory, setSearchCategory] = useState<string | undefined>("");
 	const [searchName, setSearchName] = useState<string>("");
 
-	const { token } = useContext(AuthContext);
-	const isAuth = token.length > 0;
+	const { token } = useContext(AuthContext)
+	const isAuth = token.length > 0
 
 	const onClickEdit = (article: Article) => {
-		setSelectedArticle(article);
-		setShowEditBox(true);
+		setSelectedArticle(article)
+		setShowEditBox(true)
 		setShowAddBox(false)
 		setShowFilterBox(false)
 		setShowAddButton(false)
@@ -64,6 +64,7 @@ const Home = () => {
 			.then(() => {
 				getArticles()
 				getCategories()
+				console.log("Article deleted")
 			})
 			.catch(error => {
 				console.log(error.response)
@@ -79,7 +80,6 @@ const Home = () => {
 		})
 			.then((res) => {
 				setArticles(res.data)
-				console.log(res)
 			})
 			.catch(err => {
 				console.log(err.response)
@@ -90,7 +90,6 @@ const Home = () => {
 		axios.get(`http://localhost:8080/categories`)
 			.then((res) => {
 				setCategories(res.data)
-				console.log(res)
 			})
 			.catch(err => {
 				console.log(err.response)
@@ -140,7 +139,7 @@ const Home = () => {
 									<h2>{article.name}</h2>
 									<p>{article.category.name}</p>
 								</div>
-								<img src={article.picture} />
+								<img src={article.picture} alt={article.name} />
 							</button>
 
 							{showText === article.id && <div className='box'>

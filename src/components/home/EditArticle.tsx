@@ -27,7 +27,7 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 			})
 			.catch(err => {
 				console.log(err.response)
-				setError(err.response.data.error);
+				setError(err.response.data.error || err.response.data.message);
 			})
 	}
 
