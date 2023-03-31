@@ -13,7 +13,7 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 	const [error, setError] = useState<string>("");
 
 	const register = async () => {
-		await axios.post("http://localhost:8080/register",
+		await axios.post(`${process.env.REACT_APP_HOST_NAME}/register"`,
 			{ email: email, username: username, password: password, secretCode: secretCode })
 			.then(() => {
 				onClickSaveButton();
@@ -28,7 +28,7 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 	// maybe I should not log in directly after i registered ?
 	const login = () => {
 		axios.post(
-			"http://localhost:8080/login",
+			`${process.env.REACT_APP_HOST_NAME}/login`,
 			{ email: email, password: password },
 			{ withCredentials: true }
 		)

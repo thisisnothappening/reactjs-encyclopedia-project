@@ -59,7 +59,7 @@ const Home = () => {
 	}, [showAddBox, showEditBox])
 
 	const deleteArticle = (article: Article) => {
-		axios.delete(`http://localhost:8080/articles/${article.id}`,
+		axios.delete(`${process.env.REACT_APP_HOST_NAME}/articles/${article.id}`,
 			{ headers: { Authorization: `Bearer ${token}` } })
 			.then(() => {
 				getArticles()
@@ -71,7 +71,7 @@ const Home = () => {
 	}
 
 	const getArticles = () => {
-		axios.get(`http://localhost:8080/articles`, {
+		axios.get(`${process.env.REACT_APP_HOST_NAME}/articles`, {
 			params: {
 				name: searchName || "",
 				category: searchCategory || "",
@@ -86,7 +86,7 @@ const Home = () => {
 	}
 
 	const getCategories = () => {
-		axios.get(`http://localhost:8080/categories`)
+		axios.get(`${process.env.REACT_APP_HOST_NAME}/categories`)
 			.then((res) => {
 				setCategories(res.data)
 			})

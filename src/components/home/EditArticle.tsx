@@ -18,7 +18,7 @@ const EditArticle: FC<Props> = ({ selectedArticle, saveForm }) => {
 	const { token } = useContext(AuthContext);
 
 	const editArticle = () => {
-		axios.put(`http://localhost:8080/articles/${selectedArticle.id}`,
+		axios.put(`${process.env.REACT_APP_HOST_NAME}/articles/${selectedArticle.id}`,
 			{ name: name, category: category, picture: picture, text: text },
 			{ headers: { Authorization: `Bearer ${token}` } })
 			.then(() => {

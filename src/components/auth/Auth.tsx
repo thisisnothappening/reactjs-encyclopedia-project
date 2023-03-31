@@ -56,7 +56,7 @@ const Auth = () => {
 
 	const logout = () => {
 		axios.get(
-			"http://localhost:8080/logout",
+			`${process.env.REACT_APP_HOST_NAME}/logout`,
 			{ withCredentials: true }
 		)
 			.then(() => {

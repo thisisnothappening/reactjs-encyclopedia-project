@@ -12,7 +12,7 @@ const Login: FC<Props> = ({ onClickSaveButton }) => {
 
 	const login = () => {
 		axios.post(
-			"http://localhost:8080/login",
+			`${process.env.REACT_APP_HOST_NAME}/login`,
 			{ email: email, password: password },
 			{ withCredentials: true }
 		)

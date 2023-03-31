@@ -17,7 +17,7 @@ const AddArticle: FC<Props> = ({ saveForm }) => {
 	const { token } = useContext(AuthContext);
 
 	const addArticle = () => {
-		axios.post("http://localhost:8080/articles",
+		axios.post(`${process.env.REACT_APP_HOST_NAME}/articles`,
 			{ name: name, category: category, picture: picture, text: text },
 			{ headers: { Authorization: `Bearer ${token}` } })
 			.then(() => {

@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		axios.get(
-			`http://localhost:8080/refresh`,
+			`${process.env.REACT_APP_HOST_NAME}/refresh`,
 			{ withCredentials: true }
 		)
 			.then((res) => {
