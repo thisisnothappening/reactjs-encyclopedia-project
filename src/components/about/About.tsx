@@ -12,7 +12,7 @@ const About = () => {
 				</div>
 				<div className="about-box-text">
 					<p>Here is my GitHub: <a href="https://github.com/thisisnothappening">https://github.com/thisisnothappening</a></p>
-					<p>Here is my frontend repository: <a href="https://github.com/thisisnothappening/Java-Encyclopedia-Project-Frontend">https://github.com/thisisnothappening/Java-Encyclopedia-Project-Frontend</a></p>
+					<p>Here is my frontend repository: <a href="https://github.com/thisisnothappening/reactjs-encyclopedia-project">https://github.com/thisisnothappening/reactjs-encyclopedia-project</a></p>
 					<p>Here is my backend repository: <a href="https://github.com/thisisnothappening/nodejs-encyclopedia-project">https://github.com/thisisnothappening/nodejs-encyclopedia-project</a></p>
 					<br />
 					<p>This is the first website that I made.</p>
