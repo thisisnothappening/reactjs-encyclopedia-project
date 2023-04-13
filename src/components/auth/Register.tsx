@@ -13,7 +13,7 @@ const Register: FC<Props> = ({ onClickSaveButton }) => {
 	const [error, setError] = useState<string>("");
 
 	const register = async () => {
-		await axios.post(`${process.env.REACT_APP_HOST_NAME}/register"`,
+		await axios.post(`${process.env.REACT_APP_HOST_NAME}/register`,
 			{ email: email, username: username, password: password, secretCode: secretCode })
 			.then(() => {
 				onClickSaveButton();
