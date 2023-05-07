@@ -7,3 +7,5 @@ describe("temp test", () => {
 		expect(n3).toBe(12);
 	})
 })
+
+export {}
