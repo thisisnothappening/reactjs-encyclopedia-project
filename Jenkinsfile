@@ -24,10 +24,10 @@ pipeline {
 			    withCredentials([
 			        string(credentialsId: 'docker-login-password', variable: 'DOCKER_PASSWORD')
 			        ]) {
-			        sh "docker build -t reactjs-encyclopedia-project:notpacked -f Dockerfile.start ."
-			        sh "docker tag reactjs-encyclopedia-project:notpacked thisisnothappening/reactjs-encyclopedia-project:notpacked"
+			        sh "docker build -t reactjs-encyclopedia-project:latest -f Dockerfile.start ."
+			        sh "docker tag reactjs-encyclopedia-project:latest thisisnothappening/reactjs-encyclopedia-project:latest"
 			        sh 'docker login --username thisisnothappening --password $DOCKER_PASSWORD'
-			        sh "docker push thisisnothappening/reactjs-encyclopedia-project:notpacked"
+			        sh "docker push thisisnothappening/reactjs-encyclopedia-project:latest"
 			        sh "docker image prune -a -f"
 			    }
 			}
