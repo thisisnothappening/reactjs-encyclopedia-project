@@ -28,7 +28,7 @@ pipeline {
 			        sh "docker tag reactjs-encyclopedia-project:latest thisisnothappening/reactjs-encyclopedia-project:latest"
 			        sh 'docker login --username thisisnothappening --password $DOCKER_PASSWORD'
 			        sh "docker push thisisnothappening/reactjs-encyclopedia-project:latest"
-			        sh "docker image prune -a -f"
+			        sh "docker image prune -f"
 			    }
 			}
 		}
