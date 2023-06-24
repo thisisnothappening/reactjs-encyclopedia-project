@@ -20,6 +20,9 @@ pipeline {
 			}
 		}
 		stage("Push Image") {
+			when {
+                branch 'main'
+            }
 			steps {
 			    withCredentials([
 			        string(credentialsId: 'docker-login-password', variable: 'DOCKER_PASSWORD')
@@ -33,6 +36,9 @@ pipeline {
 			}
 		}
 		stage("Deploy") {
+			when {
+                branch 'main'
+            }
 		    steps{
 		        withCredentials([
 					sshUserPrivateKey(credentialsId: 'aws-vm-key', keyFileVariable: 'KEYFILE'),
