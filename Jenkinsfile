@@ -35,16 +35,16 @@ pipeline {
 		stage("Deploy") {
 		    steps{
 		        withCredentials([
-					sshUserPrivateKey(credentialsId: 'amazon-linux-vm-key', keyFileVariable: 'KEYFILE'),
+					sshUserPrivateKey(credentialsId: 'aws-vm-key', keyFileVariable: 'KEYFILE'),
 					string(credentialsId: 'ec2-ssh-user-and-dns', variable: 'TOKEN')
 					]) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no -i $KEYFILE $TOKEN '
                         cd .server &&
-                        sudo docker-compose stop backend &&
+                        sudo docker-compose stop frontend &&
                         sudo docker container prune -f &&
                         sudo docker-compose up -d &&
-                        sudo docker image prune -a -f
+                        sudo docker image prune -f
                         '
                     '''
 				}
